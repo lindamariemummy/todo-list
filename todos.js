@@ -1,19 +1,21 @@
 $(document).ready(function() {
-	$("#addButton").click( function() {
-		var el = document.getElementById("userEntry").value;
-		if (el == "") {
-			$("#addButton").after("<div id='error'>Don't you want to type something?</div>");
+	
+	$("#addButton").on("click", function() {
+		$entry = $("#userEntry").val();
+		
+		if ($entry === "") {
+			$("#error").text("Don't you want to type something?");
 		}
 		else {
-			$(".tableOfTodos").append("<tr><td><div class='todobox'>" + el + "</div></td></tr>");	
-
-					
+			$(".tableOfTodos").append("<tr><td><div class='todobox'>" + $entry + "</div></td></tr>");					
 			$("#userEntry").val(""); //resets textbox
-			$("#error").remove(); //removes error message
-		}	
-		$(".todobox").click(function() {
-			$(this).remove();		
-		});		
-	});
+			$("#error").text(""); //blanks out error message
+		}	  
+		
+		$('.todobox').on("click", function() { //todo list items disappear when clicked
+			$(this).fadeOut("fast");		
+		});
+
+	});	
 });
 
